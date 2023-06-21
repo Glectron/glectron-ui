@@ -4,5 +4,5 @@
         "declaration": true,
         "outDir": "dist"
     },
-    "include": ["node_modules/@glectron/core/build/js/types/types.d.ts"]
+    "include": ["node_modules/@glectron/core/build/js/types/types.d.ts", "src/**/*.ts"]
 }
