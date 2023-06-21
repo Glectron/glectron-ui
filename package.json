@@ -1,0 +1,31 @@
+{
+  "name": "glectron-ui",
+  "version": "1.0.0",
+  "description": "Glectron UI library",
+  "type": "module",
+  "main": "dist/index.js",
+  "repository": "https://github.com/Glectron/glectron-ui.git",
+  "author": "YUCLing <luotianyi@luotianyi.me>",
+  "license": "MIT",
+  "private": false,
+  "browserslist": [
+    "Chrome 18"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "eslint": "^8.43.0",
+    "rollup": "^3.25.1",
+    "tslib": "^2.5.3",
+    "typescript": "^5.1.3"
+  }
+}
