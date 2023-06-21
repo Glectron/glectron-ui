@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Glectron UI library",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/bundle.js",
+  "browser": "dist/bundle.min.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/Glectron/glectron-ui.git",
   "author": "YUCLing <luotianyi@luotianyi.me>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist"
+  ],
   "browserslist": [
     "Chrome 18"
   ],
