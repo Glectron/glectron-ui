@@ -30,7 +30,7 @@ export default class Window {
             ...options
         };
 
-        this.titlebarElement = element.querySelector(this.options.titlebarSelector);
+        this.titlebarElement = element.querySelector(this.options.titlebarSelector as string) as HTMLElement;
         this.titlebarElement.addEventListener("mousedown", this.onTitlebarMouseDown.bind(this));
 
         this.element.addEventListener("mousemove", this.mouseMove.bind(this));
@@ -56,7 +56,7 @@ export default class Window {
         if (this.element.style.cursor.indexOf("resize") != -1 || this.resizing || !this.options.draggable) return;
 
         const targetEl = e.target as HTMLElement;
-        if (targetEl.classList.contains(this.options.titlebarNoDragSelector) || targetEl.closest(this.options.titlebarNoDragSelector)) {
+        if (targetEl.classList.contains(this.options.titlebarNoDragSelector as string) || targetEl.closest(this.options.titlebarNoDragSelector as string)) {
             return;
         }
 
@@ -78,7 +78,7 @@ export default class Window {
         this.resizeOffsetTop = y - rect.y;
         this.resizeOffsetRight = rect.right - x;
         this.resizeOffsetBottom = rect.bottom - y;
-        const resizeDist = this.options.resizeRegionWidth;
+        const resizeDist = this.options.resizeRegionWidth as number;
         if (this.resizeOffsetTop <= resizeDist) {
             if (this.resizeOffsetLeft <= resizeDist) {
                 styl.cursor = "nw-resize";
@@ -139,12 +139,14 @@ export default class Window {
             styl.left = mEvnt.x - this.draggingOffsetX + "px";
             styl.top = mEvnt.y - this.draggingOffsetY + "px";
         } else if (this.resizing) {
+            const minWidth = this.options.minWidth as number;
+            const minHeight = this.options.minHeight as number;
             const styl = this.element.style;
             const dirs = this.element.style.cursor.split("-")[0];
             if (dirs.indexOf("n") != -1) {
                 const nTop = mEvnt.y - this.resizeOffsetTop;
                 const nHeight = this.originalWindowRect.bottom - nTop;
-                if (nHeight > this.options.minHeight || nHeight > this.lastResizeHeight) {
+                if (nHeight > minHeight || nHeight > this.lastResizeHeight) {
                     styl.top = nTop + "px";
                     styl.height = nHeight + "px";
                     this.lastResizeHeight = nHeight;
@@ -153,7 +155,7 @@ export default class Window {
             if (dirs.indexOf("w") != -1) {
                 const nLeft = e.detail.x - this.resizeOffsetLeft;
                 const nWidth = this.originalWindowRect.right - nLeft;
-                if (nWidth > this.options.minWidth || nWidth > this.lastResizeWidth) {
+                if (nWidth > minWidth || nWidth > this.lastResizeWidth) {
                     styl.left = nLeft + "px";
                     styl.width = nWidth + "px";
                     this.lastResizeWidth = nWidth;
@@ -161,14 +163,14 @@ export default class Window {
             }
             if (dirs.indexOf("s") != -1) {
                 const nHeight = e.detail.y + this.resizeOffsetBottom - this.originalWindowRect.top;
-                if (nHeight > this.options.minHeight || nHeight > this.lastResizeHeight) {
+                if (nHeight > minHeight || nHeight > this.lastResizeHeight) {
                     styl.height = nHeight + "px";
                     this.lastResizeHeight = nHeight;
                 }
             }
             if (dirs.indexOf("e") != -1) {
                 const nWidth = e.detail.x + this.resizeOffsetRight - this.originalWindowRect.left;
-                if (nWidth > this.options.minWidth || nWidth > this.lastResizeWidth) {
+                if (nWidth > minWidth || nWidth > this.lastResizeWidth) {
                     styl.width = nWidth + "px";
                     this.lastResizeWidth = nWidth;
                 }
