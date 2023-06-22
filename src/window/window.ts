@@ -31,6 +31,9 @@ export default class Window {
         };
 
         this.titlebarElement = element.querySelector(this.options.titlebarSelector as string) as HTMLElement;
+        if (!this.titlebarElement) {
+            throw "Unable to find the titlebar element.";
+        }
         this.titlebarElement.addEventListener("mousedown", this.onTitlebarMouseDown.bind(this));
 
         this.element.addEventListener("mousemove", this.mouseMove.bind(this));
@@ -139,8 +142,8 @@ export default class Window {
             styl.left = mEvnt.x - this.draggingOffsetX + "px";
             styl.top = mEvnt.y - this.draggingOffsetY + "px";
         } else if (this.resizing) {
-            const minWidth = this.options.minWidth as number;
-            const minHeight = this.options.minHeight as number;
+            const minWidth = this.options.minWidth || 0;
+            const minHeight = this.options.minHeight || 0;
             const styl = this.element.style;
             const dirs = this.element.style.cursor.split("-")[0];
             if (dirs.indexOf("n") != -1) {

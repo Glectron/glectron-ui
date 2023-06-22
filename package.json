@@ -1,6 +1,6 @@
 {
   "name": "@glectron/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Glectron UI library",
   "type": "module",
   "main": "dist/bundle.js",
